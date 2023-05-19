@@ -1,0 +1,189 @@
+@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+
+:root {
+  --font-title: 'Russo One', sans-serif;
+  --font-body: 'Roboto', sans-serif;
+  --header-color: #63B1E1;
+  --cards-border: 1px solid #5C6AED;
+  --padding: 1rem;
+}
+
+* {
+  font-family: var(--font-body);
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #e4e5e6;
+  margin-bottom: 100px;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+.header {
+  padding: 1rem min(5rem, 2vw);
+  background-color: var(--header-color);
+  box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.315);
+  color: white;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1300px;
+  margin: auto;
+  padding: 0 var(--padding);
+}
+
+.header .title {
+  font-family: var(--font-title);
+  font-size: 3.5rem;
+}
+
+.buttons-container button {
+  border-radius: 10px;
+  padding: .5rem 1.3rem;
+  font-weight: bold;
+  border: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: var(--header-color);
+  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.349);
+  transition:  all .2s;
+
+}
+
+.buttons-container button:hover {
+  background-color: #f7f2f2d7;
+}
+
+.buttons-container button:active {
+  box-shadow: inset 1px 2px 5px rgba(0, 0, 0, 0.493);
+}
+
+.main-content {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(350px, 1fr));
+  max-width: 1300px;
+  margin: auto;
+  padding: var(--padding);
+  color: rgb(32, 32, 32);
+  gap: 30px;
+}
+
+.card-container {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  flex-wrap: wrap;
+  border-radius: 10px;
+  padding: var(--padding);
+  height: fit-content;
+  box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.26);
+  background-color: rgb(245, 243, 243);
+}
+
+.book-title {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.book-author {
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.card-container button {
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: .5rem;
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+.card-container button.read {
+  background-color: #4bc04b;
+}
+
+.card-container button.not-read {
+  background-color: #c74040;
+}
+
+.card-container button.remove {
+  background-color: #979595;
+}
+
+.card-container button.remove:hover {
+  background-color: #979595c2;
+}
+
+.card-container button.read:hover {
+  background-color: #4bc04bc7;
+}
+
+.card-container button.not-read:hover {
+  background-color: #c74040c7;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  gap: 5px;
+  font-size: 1.2rem;
+  padding: 5px;
+  color: rgb(63, 60, 60);
+}
+
+.footer a {
+  font-style: italic;
+  text-decoration: none;
+  color: black;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 1191px) {
+  .main-content {
+    grid-template-columns: repeat(2, minmax(300px, 1fr))
+  }
+}
+
+@media screen and (max-width: 891px) {
+  * {
+    font-size: 13px;
+  }
+  .header-content button {
+    font-size: clamp(1rem, 5vw, 2rem);
+  }
+  .main-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 500px) {
+   .header-content {
+    flex-direction: column;
+    gap: 30px;
+  }
+  .buttons-container button {
+    padding: .2rem 1rem;
+  }
+}

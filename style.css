@@ -5,8 +5,8 @@
 :root {
   --font-title: 'Russo One', sans-serif;
   --font-body: 'Roboto', sans-serif;
-  --header-color: #63B1E1;
-  --cards-border: 1px solid #5C6AED;
+  --light-blue: #63B1E1;
+  --cards-title:#5C6AED;
   --padding: 1rem;
 }
 
@@ -29,7 +29,7 @@ html {
 
 .header {
   padding: 1rem min(5rem, 2vw);
-  background-color: var(--header-color);
+  background-color: var(--light-blue);
   box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.315);
   color: white;
 }
@@ -55,8 +55,7 @@ html {
   border: none;
   font-size: 1.8rem;
   cursor: pointer;
-  color: var(--header-color);
-  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.349);
+  color: var(--light-blue);
   transition:  all .2s;
 
 }
@@ -65,7 +64,11 @@ html {
   background-color: #f7f2f2d7;
 }
 
-.buttons-container button:active {
+.button {
+   box-shadow: 2px 3px 5px #00000059;
+}
+
+.button:active {
   box-shadow: inset 1px 2px 5px rgba(0, 0, 0, 0.493);
 }
 
@@ -74,7 +77,7 @@ html {
   grid-template-columns: repeat(3, minmax(350px, 1fr));
   max-width: 1300px;
   margin: auto;
-  padding: var(--padding);
+  padding:  2rem var(--padding);
   color: rgb(32, 32, 32);
   gap: 30px;
 }
@@ -160,6 +163,83 @@ html {
   text-decoration: underline;
 }
 
+.adding-book {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  backdrop-filter: blur(1px);
+  background-color: rgba(0, 0, 0, 0.342);
+}
+
+form {
+   display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #e4e5e6;
+  width: 350px;
+  border-radius: 10px;
+  box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.336);
+  padding: 1rem;
+  gap: 10px;
+}
+
+.form-row {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  gap: 5px;
+}
+
+.form-row label {
+   font-size: 1.2rem;
+   color: rgb(39, 39, 39);
+}
+
+.form-container input {
+  border: 1px solid rgba(0, 0, 0, 0.753);
+  border-radius: 5px;
+  outline: none;
+  padding: .5rem;
+  background-color: transparent;
+  font-size: 1.2rem;
+}
+
+.form-container input:focus {
+  border: 1px solid var(--light-blue);
+}
+
+.check-container {
+  display: flex;
+  padding: 1rem 0;
+  gap: 10px;
+}
+
+.check-container input[type='checkbook'] {
+  width: 30px;
+}
+
+.form-row button {
+  align-self: center;
+  border-radius: 10px;
+  border: 1px solid var(--light-blue);
+  padding: .5rem;
+  width: 50%;
+  background-color: var(--light-blue);
+  font-size: 1.2rem;
+  color: white;
+}
+
+.form-row button:hover {
+  background-color: #7bb8df;
+}
+
+
 @media screen and (max-width: 1191px) {
   .main-content {
     grid-template-columns: repeat(2, minmax(300px, 1fr))
@@ -167,11 +247,8 @@ html {
 }
 
 @media screen and (max-width: 891px) {
-  * {
-    font-size: 13px;
-  }
   .header-content button {
-    font-size: clamp(1rem, 5vw, 2rem);
+    font-size: min(1rem, 5vw);
   }
   .main-content {
     grid-template-columns: 1fr;

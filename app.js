@@ -2,29 +2,17 @@ const btnSubmit = document.querySelector('#submit');
 const btnAddBook = document.querySelector('#addBook');
 const formModal = document.querySelector('#form-modal');
 
-let library = [
-	{
-		title: 'The Hobbit',
-		author: 'tolkien',
-		pages: 360,
-		isRead: true,
-	},
-	{
-		title: 'Sobre a brevidade da vida',
-		author: 'Sêneca',
-		pages: 120,
-		isRead: true,
-	},
-];
-
 class Book {
-	constructor(title, author, pages, isRead) {
+	constructor(title, author, pages, isRead, key) {
 		this.title = title;
 		this.author = author;
 		this.pages = pages;
 		this.isRead = isRead;
+		this.key = key;
 	}
 }
+
+let library = [new Book('Sobre a brevidade da vida', 'tolkien', 360, true, 0)];
 
 function makeNewCards() {
 	library.forEach((book) => makeCard(book));
@@ -40,7 +28,7 @@ function closeFormModal() {
 
 function addBook(e) {
 	e.preventDefault();
-	let book = getInputValues();
+	let book = getBookProperty();
 
 	if (book === false) {
 		alert('You must fill in all inputs to submitting.');
@@ -48,22 +36,23 @@ function addBook(e) {
 	}
 
 	library.push(book);
-
 	makeCard(library[library.length - 1]);
 	closeFormModal();
 }
 
-function getInputValues() {
+function getBookProperty() {
 	let title = document.querySelector('#title').value;
 	let author = document.querySelector('#author').value;
-	let pages = document.querySelector('#pages').value;
+	let pages = Number(document.querySelector('#pages').value);
 	let isRead = document.querySelector('#read').checked;
+	let key = getKey();
 
-	if (title === '' || author === '' || pages === '') {
-		return false;
-	}
+	if (title === '' || author === '' || pages === '') return false
+	return new Book(title, author, pages, isRead, key);
+}
 
-	return new Book(title, author, pages, isRead);
+function getKey() {
+	return library.length + 1;
 }
 
 function makeCard(book) {
@@ -82,7 +71,7 @@ function makeCard(book) {
 	);
 	setButtons(book, cardContainer);
 	appendCard(cardContainer);
-	setDataIndex();
+	setDataKey(book, cardContainer);
 }
 
 function addClass(card, title, author, pages) {
@@ -129,17 +118,21 @@ function addfunctions(btnRead, btnRemove) {
 
 function removeCard(e) {
 	let card = e.target.parentElement;
-	removeBookFromLibrary(card.dataset.number);
+	removeBookFromLibrary(card.dataset.key);
 	card.remove();
-	setDataIndex();
 }
 
-function removeBookFromLibrary(book) {
-	library.splice(library[book], 1);
+function removeBookFromLibrary(key) {
+	let index = findIndexOnLibrary(key);
+	library.splice(library[index], 1);
+}
+
+function findIndexOnLibrary(key) {
+	return library.findIndex((book) => book.key === Number(key));
 }
 
 function updadeBookReadStatus(e) {
-	let index = e.target.parentElement.dataset.index;
+	let index = findIndexOnLibrary(e.target.parentElement.dataset.key);
 	library[index].isRead = library[index].isRead ? false : true;
 
 	toogleReadBtn(library[index], e.target);
@@ -150,11 +143,8 @@ function appendCard(card) {
 	Cards.appendChild(card);
 }
 
-function setDataIndex() {
-	let cards = [...document.querySelectorAll('.card-container')];
-	cards.forEach((card) => {
-		card.dataset.index = cards.indexOf(card);
-	});
+function setDataKey({ key }, card) {
+	card.dataset.key = key;
 }
 
 btnAddBook.addEventListener('click', openFormModal);

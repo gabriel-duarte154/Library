@@ -192,7 +192,7 @@ form {
   flex-direction: column;
   align-items: center;
   background-color: var(--light-white);
-  width: 350px;
+  width: min(90vw, 350px);
   border-radius: 10px;
   box-shadow: var(--shadow);
   padding: 1rem;
@@ -244,6 +244,7 @@ form {
   background-color: var(--light-violet);
   font-size: 1.2rem;
   color: white;
+  word-wrap: break-word;
 }
 
 .form-row button:hover {

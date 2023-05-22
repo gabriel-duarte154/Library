@@ -5,9 +5,18 @@
 :root {
   --font-title: 'Russo One', sans-serif;
   --font-body: 'Roboto', sans-serif;
-  --light-blue: #63B1E1;
-  --cards-title:#5C6AED;
+  --bg-color: #e4e5e6;
+  --light-white: #f5f3f3;
+  --light-violet: #5C6AED;
+  --light-violet-hover: #737fec;
   --padding: 1rem;
+  --green: #4bc04b;
+  --light-green: #4bc04bc7;
+  --red: #c74040;
+  --light-red: #c74040c7;
+  --grey: #979595;
+  --light-grey: #979595c2;
+  --shadow: 2px 5px 7px #0000004d;
 }
 
 * {
@@ -18,7 +27,7 @@
 }
 
 body {
-  background-color: #e4e5e6;
+  background-color: var(--bg-color);
   margin-bottom: 100px;
 }
 
@@ -29,8 +38,8 @@ html {
 
 .header {
   padding: 1rem min(5rem, 2vw);
-  background-color: var(--light-blue);
-  box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.315);
+  background-color: var(--light-violet);
+  box-shadow: var(--shadow);
   color: white;
 }
 
@@ -46,6 +55,7 @@ html {
 .header .title {
   font-family: var(--font-title);
   font-size: 3.5rem;
+  text-shadow: var(--shadow);
 }
 
 .buttons-container button {
@@ -55,7 +65,7 @@ html {
   border: none;
   font-size: 1.8rem;
   cursor: pointer;
-  color: var(--light-blue);
+  color: var(--light-violet);
   transition:  all .2s;
 
 }
@@ -65,14 +75,14 @@ html {
 }
 
 .button {
-   box-shadow: 2px 3px 5px #00000059;
+   box-shadow: var(--shadow);
 }
 
 .button:active {
-  box-shadow: inset 1px 2px 5px rgba(0, 0, 0, 0.493);
+  box-shadow: inset var(--shadow);
 }
 
-.main-content {
+.cards {
   display: grid;
   grid-template-columns: repeat(3, minmax(350px, 1fr));
   max-width: 1300px;
@@ -90,8 +100,8 @@ html {
   border-radius: 10px;
   padding: var(--padding);
   height: fit-content;
-  box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.26);
-  background-color: rgb(245, 243, 243);
+  box-shadow: var(--shadow);
+  background-color: var(--light-white);
 }
 
 .book-title {
@@ -116,27 +126,27 @@ html {
 }
 
 .card-container button.read {
-  background-color: #4bc04b;
+  background-color: var(--green);
 }
 
 .card-container button.not-read {
-  background-color: #c74040;
+  background-color: var(--red);
 }
 
 .card-container button.remove {
-  background-color: #979595;
+  background-color: var(--grey);
 }
 
 .card-container button.remove:hover {
-  background-color: #979595c2;
+  background-color: var(--light-grey);
 }
 
 .card-container button.read:hover {
-  background-color: #4bc04bc7;
+  background-color: var(--light-green);
 }
 
 .card-container button.not-read:hover {
-  background-color: #c74040c7;
+  background-color: var(--light-red);
 }
 
 .footer {
@@ -167,23 +177,24 @@ html {
   display: none;
   align-items: center;
   justify-content: center;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   height: 100vh;
   width: 100vw;
   backdrop-filter: blur(1px);
   background-color: rgba(0, 0, 0, 0.342);
+  animation: showUp .8s ease;
 }
 
 form {
-   display: flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #e4e5e6;
+  background-color: var(--light-white);
   width: 350px;
   border-radius: 10px;
-  box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.336);
+  box-shadow: var(--shadow);
   padding: 1rem;
   gap: 10px;
 }
@@ -211,7 +222,7 @@ form {
 }
 
 .form-container input:focus {
-  border: 1px solid var(--light-blue);
+  border: 1px solid var(--light-violet);
 }
 
 .check-container {
@@ -227,21 +238,30 @@ form {
 .form-row button {
   align-self: center;
   border-radius: 10px;
-  border: 1px solid var(--light-blue);
+  border: 1px solid var(--light-violet);
   padding: .5rem;
   width: 50%;
-  background-color: var(--light-blue);
+  background-color: var(--light-violet);
   font-size: 1.2rem;
   color: white;
 }
 
 .form-row button:hover {
-  background-color: #7bb8df;
+  background-color: var(--light-violet-hover);
+}
+
+@keyframes showUp {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 
 @media screen and (max-width: 1191px) {
-  .main-content {
+  .cards {
     grid-template-columns: repeat(2, minmax(300px, 1fr))
   }
 }
@@ -250,7 +270,7 @@ form {
   .header-content button {
     font-size: min(1rem, 5vw);
   }
-  .main-content {
+  .cards {
     grid-template-columns: 1fr;
   }
 }

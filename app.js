@@ -12,7 +12,7 @@ class Book {
 	}
 }
 
-let library = [new Book('Sobre a brevidade da vida', 'tolkien', 360, true, 0)];
+let library = [new Book('On the Brevity of Life', 'Seneca', 360, true, 0)];
 
 function makeNewCards() {
 	library.forEach((book) => makeCard(book));

@@ -47,7 +47,7 @@ function getBookProperty() {
 	let isRead = document.querySelector('#read').checked;
 	let key = getKey();
 
-	if (title === '' || author === '' || pages === '') return false
+	if (title === '' || author === '' || pages === '') return false;
 	return new Book(title, author, pages, isRead, key);
 }
 

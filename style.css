@@ -204,12 +204,12 @@ form {
   display: flex;
   flex-direction: column;
   width: 90%;
-  gap: 5px;
 }
 
 .form-row label {
    font-size: 1.2rem;
    color: rgb(39, 39, 39);
+   margin-bottom: .5rem;
 }
 
 .form-container input {
@@ -249,6 +249,18 @@ form {
 
 .form-row button:hover {
   background-color: var(--light-violet-hover);
+}
+
+.error {
+  font-size: .95rem;
+  background-color: #eaeaeaea;
+  color: var(--light-red);
+  border-radius: 0 0 .3rem .3rem;
+}
+
+.active {
+  padding: .4rem;
+  margin-bottom: 1rem;
 }
 
 @keyframes showUp {

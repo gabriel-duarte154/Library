@@ -1,3 +1,5 @@
+import { saveData, getData } from './storage.js';
+
 const btnSubmit = document.querySelector('#submit');
 const btnAddBook = document.querySelector('#addBook');
 const formModal = document.querySelector('#form-modal');
@@ -5,6 +7,7 @@ const title = document.querySelector('#title');
 const author = document.querySelector('#author');
 const pages = document.querySelector('#pages');
 const read = document.querySelector('#read');
+const library = [];
 
 class Book {
   constructor(title, author, pages, isRead, key) {
@@ -16,7 +19,17 @@ class Book {
   }
 }
 
-let library = [new Book('On the Brevity of Life', 'Seneca', 360, true, 0)];
+function injectData() {
+  const data = getData();
+  for (let i in data) {
+    resetKeys(data[i]);
+    library.push(data[i]);
+  }
+}
+
+function resetKeys(book) {
+  book.key = getKey();
+}
 
 function makeNewCards() {
   library.forEach((book) => makeCard(book));
@@ -50,10 +63,11 @@ function addBook() {
   makeCard(library[library.length - 1]);
   closeFormModal();
   cleanInputs();
+  saveData(library);
 }
 
 function getKey() {
-  return library.length + 1;
+  return library.length;
 }
 
 function makeCard(book) {
@@ -121,11 +135,12 @@ function removeCard(e) {
   let card = e.target.parentElement;
   removeBookFromLibrary(card.dataset.key);
   card.remove();
+  saveData(library);
 }
 
 function removeBookFromLibrary(key) {
   let index = findIndexOnLibrary(key);
-  library.splice(library[index], 1);
+  library.splice(index, 1);
 }
 
 function findIndexOnLibrary(key) {
@@ -135,8 +150,8 @@ function findIndexOnLibrary(key) {
 function updadeBookReadStatus(e) {
   let index = findIndexOnLibrary(e.target.parentElement.dataset.key);
   library[index].isRead = library[index].isRead ? false : true;
-
   toogleReadBtn(library[index], e.target);
+  saveData(library);
 }
 
 function appendCard(card) {
@@ -206,4 +221,7 @@ btnSubmit.addEventListener('click', () => {
     addBook();
   }
 });
+
+
+injectData();
 makeNewCards();
